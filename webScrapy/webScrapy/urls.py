@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+#! /usr/bin/env python
 """webScrapy URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -20,4 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',index,),
     url(r'^pd',pd,),
+    url(r'^nr',nr,),
+    url(r'^listpd/$',listpd,),
 ]

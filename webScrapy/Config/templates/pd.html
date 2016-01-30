@@ -5,29 +5,31 @@
 
 {% block from %}
     {#将屏幕分为三列#}
+<form action="/listpd/" method="POST">
+{% csrf_token %}
     <div class="row">
         <div class="col-md-3">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="sizing-addon1">网站名称:</span>
-                <input type="text" class="form-control" placeholder="百度" aria-describedby="sizing-addon1">
+                <input type="text" class="form-control" placeholder="百度" aria-describedby="sizing-addon1" name="name">
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="sizing-addon1">频道入口:</span>
-                <input type="text" class="form-control" placeholder="URL" aria-describedby="sizing-addon1">
+                <input type="text" class="form-control" placeholder="URL" aria-describedby="sizing-addon1" name="url">
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="sizing-addon1">域名:</span>
-                <input type="text" class="form-control" placeholder="baidu.com(多个之间用“,”隔开)" aria-describedby="sizing-addon1">
+                <input type="text" class="form-control" placeholder="baidu.com(多个之间用“,”隔开)" aria-describedby="sizing-addon1" name="domains">
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="sizing-addon1">模板作者:</span>
-                <input type="text" class="form-control" placeholder="模板作者" aria-describedby="sizing-addon1">
+                <input type="text" class="form-control" placeholder="模板作者" aria-describedby="sizing-addon1" name="author">
             </div>
         </div>
     </div>
@@ -35,29 +37,44 @@
     <div class="row">
         <div class="col-md-3">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">数据库地址:</span>
-                <input type="text" class="form-control" placeholder="http://127.0.0.1" aria-describedby="sizing-addon1">
+                <span class="input-group-addon" id="sizing-addon1" >数据库地址:</span>
+                <input type="text" class="form-control" placeholder="http://127.0.0.1" aria-describedby="sizing-addon1" name="mysql">
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">数据库端口号:</span>
-                <input type="text" class="form-control" placeholder="3306" aria-describedby="sizing-addon1">
+                <span class="input-group-addon" id="sizing-addon1" >数据库端口号:</span>
+                <input type="text" class="form-control" placeholder="3306" aria-describedby="sizing-addon1" name="prot">
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">库名:</span>
-                <input type="text" class="form-control" placeholder="url" aria-describedby="sizing-addon1">
+                <span class="input-group-addon" id="sizing-addon1">用户名:</span>
+                <input type="text" class="form-control" placeholder="root" aria-describedby="sizing-addon1" name="username">
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">表名:</span>
-                <input type="text" class="form-control" placeholder="pd" aria-describedby="sizing-addon1">
+                <span class="input-group-addon" id="sizing-addon1">密码:</span>
+                <input type="password" class="form-control" placeholder="passwd" aria-describedby="sizing-addon1" name="passwd">
             </div>
         </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >库名:</span>
+                <input type="text" class="form-control" placeholder="database" aria-describedby="sizing-addon1" name="database">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >表明:</span>
+                <input type="text" class="form-control" placeholder="table" aria-describedby="sizing-addon1" name="table">
+            </div>
+        </div>
+     </div>
     <br>
     <div class="row">
         <div class="col-md-12">
@@ -68,17 +85,19 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">标题:</span>
                             <span class="input-group-addon">
-                                <select class="form-control" style="width: 100px">
-                                    <option>xpath</option>
-                                    <option>css</option>
+                                <select class="form-control" style="width: 100px" name="select_title">
+{#                                    <option name="xpath_title">xpath</option>#}
+{#                                    <option name="css_title">css</option>#}
+                                    <option >xpath</option>
+                                    <option >css</option>
                                 </select>
                             </span>
-                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1">
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="title_xpath">
                             <span class="input-group-addon" id="sizing-addon1">正则</span>
-                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1">
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="title_regex">
                             <span class="input-group-addon">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default">检测</button>
+                                    <button type="button" class="btn btn-default" name="title_test">检测</button>
                                 </div>
                             </span>
                         </div>
@@ -86,17 +105,19 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">URL:</span>
                             <span class="input-group-addon">
-                                <select class="form-control" style="width: 100px">
-                                    <option>xpath</option>
-                                    <option>css</option>
+                                <select class="form-control" style="width: 100px" name="select">
+{#                                    <option name="xpath_url">xpath</option>#}
+{#                                    <option name="css_url">css</option>#}
+                                    <option >xpath</option>
+                                    <option >css</option>
                                 </select>
                             </span>
-                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1">
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="url_xpath">
                             <span class="input-group-addon" id="sizing-addon1">正则</span>
-                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1">
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="url_regex">
                             <span class="input-group-addon">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default">检测</button>
+                                    <button type="button" class="btn btn-default" name="url_test">检测</button>
                                 </div>
                             </span>
                         </div>
@@ -110,9 +131,22 @@
             <div class="panel panel-default">
                 <div class="panel panel-primary">
                     <div class="panel-heading">结果</div>
-                    <div class="panel-body" style="height: 350px">
+                    <div class="panel-body" style="height: auto">
                         {#Jinja2参数#}
-                        <h1>content</h1>
+                        <h1>name:{{ name }}</h1>
+                        <h1>url:{{ url }}</h1>
+                        <h1>domains:{{ domains }}</h1>
+                        <h1>author:{{ author }}</h1>
+                        <h1>mysql:{{ mysql }}</h1>
+                        <h1>prot:{{ prot }}</h1>
+                        <h1>username:{{ username }}</h1>
+                        <h1>passwd:{{ passwd }}</h1>
+                        <h1>database:{{ database }}</h1>
+                        <h1>table:{{ table }}</h1>
+                        <h1>title_xpath:{{ title_xpath }}</h1>
+                        <h1>title_regex:{{ title_regex }}</h1>
+                        <h1>url_xpath:{{ url_xpath }}</h1>
+                        <h1>url_regex:{{ url_regex }}</h1>
                     </div>
                 </div>
             </div>
@@ -121,11 +155,12 @@
     <div class="row">
         <div class="col-md-3">
             <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default">测试运行</button>
-                <button type="button" class="btn btn-default">提交</button>
+                <button type="submit" class="btn btn-default">测试运行</button>
+                <button type="submit" class="btn btn-default">提交</button>
             </div>
         </div>
     </div>
+</form>
 {% endblock %}
 
 {% block content %}
