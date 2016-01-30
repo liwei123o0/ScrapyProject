@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def index(request):
     return render(request,'index.html')
+
+def pd(request):
+    return  render(request,'pd.html')

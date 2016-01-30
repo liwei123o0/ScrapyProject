@@ -13,20 +13,33 @@
     {% endblock %}</title>
 </head>
 <body>
-{% block nav %}
-    <nav class="navbar navbar-default">
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
     <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li class="active"><a class="navbar-brand" href="http://127.0.0.1:9999/">主页</a></li>
-            <li><a class="navbar-brand" href="#">频道模版</a></li>
-            <li><a class="navbar-brand" href="#">内容模版</a></li>
-            <li><a class="navbar-brand" href="#">关键字搜索模版</a></li>
-        </ul>
+        {% block nav %}
+        <div class="navbar navbar-default">
+              <!-- 自适应隐藏导航展开按钮 -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">&nbsp;&nbsp;Config1.0&nbsp;&nbsp;</a>
+            <nav id="bs-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a class="navbar-brand" href="http://127.0.0.1:9999/">首页</a></li>
+                    <li><a class="navbar-brand" href="pd.html">频道模版</a></li>
+                    <li><a class="navbar-brand" href="#">内容模版</a></li>
+                    <li><a class="navbar-brand" href="#">关键字搜索模版</a></li>
+                </ul>
+            </nav>
+        </div>
+        {% endblock %}
+        {% block from %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
-</nav>
-{% endblock %}
-{% block content %}
-
-{% endblock %}
+</header>
 </body>
 </html>
