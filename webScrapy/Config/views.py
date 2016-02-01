@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 #! /usr/bin/env python
 from django.shortcuts import render
-from .models import *
-
+from .models import RunPdDemo
+from django.http import HttpResponse
+from .forms import PdForm
 
 def index(request):
     return render(request,'index.html')
@@ -13,28 +14,26 @@ def pd(request):
 def nr(request):
     return render(request, 'nr.html')
 
-def listpd(request):
+def testpd(request):
 
-    name = str(request.POST['name'])
-    url  = str(request.POST['url'])
-    domains = str(request.POST['domains'])
-    author  = str(request.POST['author'])
-    mysql   = str(request.POST['mysql'])
-    prot    = str(request.POST['prot'])
-    username  = str(request.POST['username'])
-    passwd    = str(request.POST['passwd'])
-    database = str(request.POST['database'])
-    table   =   str(request.POST['table'])
-    # xpath_title = str(request.POST['xpath_title'])
-    # css_title   =   str(request.POST['css_title'])
-    # select_title  = str(request.POST['select_title'])
-    title_xpath =   str(request.POST['title_xpath'])
-    title_regex =   str(request.POST['title_regex'])
-    # title_test  =   str(request.POST['title_test'])
-    # select_url  = str(request.POST['select_url'])
-    url_xpath   =   str(request.POST['url_xpath'])
-    url_regex   =   str(request.POST['url_regex'])
-    # url_test    =   str(request.POST['url_test'])
+    name = request.POST['name']
+    if name =="":
+        return  render(request,'NotNull.html')
+    url  = request.POST['url']
+    domains = request.POST['domains']
+    author  = request.POST['author']
+    mysql   = request.POST['mysql']
+    prot    = request.POST['prot']
+    username  = request.POST['username']
+    passwd    = request.POST['passwd']
+    database = request.POST['database']
+    table   =   request.POST['table']
+    select_title  = request.POST['select_title']
+    title_xpath =   request.POST['title_xpath']
+    title_regex =   request.POST['title_regex']
+    select_url  = request.POST['select_url']
+    url_xpath   =   request.POST['url_xpath']
+    url_regex   =   request.POST['url_regex']
 
     return  render(request,'pd.html',{"name":name,
                                       'url':url,
@@ -46,14 +45,50 @@ def listpd(request):
                                       'passwd':passwd,
                                       'database':database,
                                       'table':table,
-                                      # 'select_title':select_title,
-                                      # 'xpath_title':xpath_title,
-                                      # 'css_title':css_title,
+                                      'select_title':select_title,
                                       'title_xpath':title_xpath,
                                       'title_regex':title_regex,
-                                      # 'title_test':title_test,
-                                      # 'select_url':select_url,
+                                      'select_url':select_url,
                                       'url_xpath':url_xpath,
                                       'url_regex':url_regex,
-                                      # 'url_test':url_test,
                                       })
+def runpd(request):
+
+    name = request.POST['name']
+    if name =="":
+        return  render(request,'NotNull.html')
+    url  = request.POST['url']
+    domains = request.POST['domains']
+    author  = request.POST['author']
+    mysql   = request.POST['mysql']
+    prot    = request.POST['prot']
+    username  = request.POST['username']
+    passwd    = request.POST['passwd']
+    database = request.POST['database']
+    table   =   request.POST['table']
+    select_title  = request.POST['select_title']
+    title_xpath =   request.POST['title_xpath']
+    title_regex =   request.POST['title_regex']
+    select_url  = request.POST['select_url']
+    url_xpath   =   request.POST['url_xpath']
+    url_regex   =   request.POST['url_regex']
+
+
+    RunPdDemo.objects.create(name=name,
+                         url=url,
+                         domains=domains,
+                         author=author,
+                         mysql=mysql,
+                         prot=prot,
+                         username=username,
+                         passwd=passwd,
+                         database=database,
+                         table=table,
+                         select_title=select_title,
+                         title_xpath=title_xpath,
+                         title_regex=title_regex,
+                         select_url=select_url,
+                         url_xpath=url_xpath,
+                         url_regex=url_regex)
+
+    return render(request,'success.html')

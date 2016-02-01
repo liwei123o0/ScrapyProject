@@ -5,7 +5,7 @@
 
 {% block from %}
     {#将屏幕分为三列#}
-<form action="/listpd/" method="POST">
+<form action="/testpd/" method="POST" name="form">
 {% csrf_token %}
     <div class="row">
         <div class="col-md-3">
@@ -97,7 +97,7 @@
                             <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="title_regex">
                             <span class="input-group-addon">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" name="title_test">检测</button>
+                                    <button type="button" class="btn btn-default" onclick="title_test()">检测</button>
                                 </div>
                             </span>
                         </div>
@@ -105,9 +105,7 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">URL:</span>
                             <span class="input-group-addon">
-                                <select class="form-control" style="width: 100px" name="select">
-{#                                    <option name="xpath_url">xpath</option>#}
-{#                                    <option name="css_url">css</option>#}
+                                <select class="form-control" style="width: 100px" name="select_url">
                                     <option >xpath</option>
                                     <option >css</option>
                                 </select>
@@ -115,14 +113,24 @@
                             <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="url_xpath">
                             <span class="input-group-addon" id="sizing-addon1">正则</span>
                             <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="url_regex">
-                            <span class="input-group-addon">
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" name="url_test">检测</button>
-                                </div>
-                            </span>
+{#                            <form action="/listpd/" method="POST" name="form1">#}
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="url_test()">检测</button>
+                                    </div>
+                                </span>
+{#                            </form>#}
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="btn-group" role="group" aria-label="">
+                <button type="button" class="btn btn-default" onclick="testpd()">测试运行</button>
+                <button type="button" class="btn btn-default" onclick="runpd()">提交</button>
             </div>
         </div>
     </div>
@@ -147,22 +155,34 @@
                         <h1>title_regex:{{ title_regex }}</h1>
                         <h1>url_xpath:{{ url_xpath }}</h1>
                         <h1>url_regex:{{ url_regex }}</h1>
+                        <h1>select_title:{{ select_title }}</h1>
+                        <h1>select_url:{{ select_url }}</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="submit" class="btn btn-default">测试运行</button>
-                <button type="submit" class="btn btn-default">提交</button>
-            </div>
-        </div>
-    </div>
 </form>
 {% endblock %}
-
 {% block content %}
-
+{% endblock %}
+{% block javascript %}
+    <script>
+        function testpd(){
+            document.form.action="/testpd/";
+            document.form.submit();
+        }
+        function runpd(){
+            document.form.action="/runpd/";
+            document.form.submit();
+        }
+        function url_test(){
+            document.form.action="/testpd/";
+            document.form.submit();
+        }
+        function title_test(){
+            document.form.action="/testpd/";
+            document.form.submit();
+        }
+    </script>
 {% endblock %}

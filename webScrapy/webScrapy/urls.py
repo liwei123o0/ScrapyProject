@@ -21,7 +21,8 @@ from Config.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',index,),
-    url(r'^pd',pd,),
+    url(r'^pd',pd,name="pd"),
     url(r'^nr',nr,),
-    url(r'^listpd/$',listpd,),
+    url(r'^testpd/$',testpd,),
+    url(r'^runpd/$',runpd,),
 ]
