@@ -1,25 +1,28 @@
 {% extends "base.html" %}
-{% block title %}
-频道模板
-{% endblock %}
-
 {% block from %}
-    {#将屏幕分为三列#}
-<form action="/testpd/" method="POST" name="form">
-{% csrf_token %}
+    <form action="/testcontentpd/" method="POST" name="form">
+    {% csrf_token %}
     <div class="row">
         <div class="col-md-3">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">网站名称:</span>
-                <input type="text" class="form-control"  placeholder="百度" aria-describedby="sizing-addon1" name="name">
+                <span class="input-group-addon" id="sizing-addon1">网站类型:</span>
+                <select class="form-control"  name="webtype">
+                    <option >新闻</option>
+                    <option >论坛</option>
+                    <option >电子报</option>
+                    <option >博客</option>
+                    <option >贴吧</option>
+                    <option >微博</option>
+                    <option >微信</option>
+                </select>
             </div>
         </div>
-        <div class="col-md-3">
+         <div class="col-md-3">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1">频道入口:</span>
-                <input type="text" class="form-control" placeholder="URL" aria-describedby="sizing-addon1" name="url">
+                <span class="input-group-addon" id="sizing-addon1" >模版特征:</span>
+                <input type="text" class="form-control" placeholder="templatesURL" aria-describedby="sizing-addon1" name="url">
             </div>
-        </div>
+         </div>
         <div class="col-md-3">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="sizing-addon1">域名:</span>
@@ -74,7 +77,7 @@
                 <input type="text" class="form-control" placeholder="table" aria-describedby="sizing-addon1" name="table">
             </div>
         </div>
-     </div>
+    </div>
     <br>
     <div class="row">
         <div class="col-md-12">
@@ -82,24 +85,6 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">配置规则</div>
                     <div class="panel-body">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon1">标题:</span>
-                            <span class="input-group-addon">
-                                <select class="form-control" style="width: 100px" name="select_title">
-                                    <option >xpath</option>
-                                    <option >css</option>
-                                </select>
-                            </span>
-                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="title_xpath">
-                            <span class="input-group-addon" id="sizing-addon1">正则</span>
-                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="title_regex">
-                            <span class="input-group-addon">
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" onclick="title_test()">检测</button>
-                                </div>
-                            </span>
-                        </div>
-                        <br>
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">URL:</span>
                             <span class="input-group-addon">
@@ -111,13 +96,11 @@
                             <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="url_xpath">
                             <span class="input-group-addon" id="sizing-addon1">正则</span>
                             <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="url_regex">
-{#                            <form action="/listpd/" method="POST" name="form1">#}
                                 <span class="input-group-addon">
                                     <div class="btn-group" role="group" aria-label="">
                                         <button type="button" class="btn btn-default" onclick="url_test()">检测</button>
                                     </div>
                                 </span>
-{#                            </form>#}
                         </div>
                     </div>
                 </div>
@@ -139,7 +122,7 @@
                     <div class="panel-heading">结果</div>
                     <div class="panel-body" style="height: auto">
                         {#Jinja2参数#}
-                        <h1>name:{{ name }}</h1>
+                        <h1>Web URL:{{ webtype }}</h1>
                         <h1>url:{{ url }}</h1>
                         <h1>domains:{{ domains }}</h1>
                         <h1>author:{{ author }}</h1>
@@ -149,37 +132,28 @@
                         <h1>passwd:{{ passwd }}</h1>
                         <h1>database:{{ database }}</h1>
                         <h1>table:{{ table }}</h1>
-                        <h1>title_xpath:{{ title_xpath }}</h1>
-                        <h1>title_regex:{{ title_regex }}</h1>
                         <h1>url_xpath:{{ url_xpath }}</h1>
                         <h1>url_regex:{{ url_regex }}</h1>
-                        <h1>select_title:{{ select_title }}</h1>
                         <h1>select_url:{{ select_url }}</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
-{% endblock %}
-{% block content %}
+    </form>
 {% endblock %}
 {% block javascript %}
-    <script>
+<script>
         function testpd(){
-            document.form.action="/testpd/";
+            document.form.action="/testcontentpd/";
             document.form.submit();
         }
         function runpd(){
-            document.form.action="/runpd/";
+            document.form.action="/runcontentpd/";
             document.form.submit();
         }
         function url_test(){
-            document.form.action="/testpd/";
-            document.form.submit();
-        }
-        function title_test(){
-            document.form.action="/testpd/";
+            document.form.action="/testcontentpd/";
             document.form.submit();
         }
     </script>

@@ -22,7 +22,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',index,),
     url(r'^pd',pd,name="pd"),
+    url(r'^contentpd',contentpd,name="pdcontent"),
     url(r'^nr',nr,),
     url(r'^testpd/$',testpd,),
+    url(r'^testcontentpd/$',testcontentpd,),
     url(r'^runpd/$',runpd,),
+    url(r'^runcontentpd/$',runcontentpd,),
 ]
