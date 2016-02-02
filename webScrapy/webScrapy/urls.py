@@ -23,9 +23,11 @@ urlpatterns = [
     url(r'^$',index,),
     url(r'^pd',pd,name="pd"),
     url(r'^contentpd',contentpd,name="pdcontent"),
-    url(r'^nr',nr,),
+    url(r'^demo',demo,),
     url(r'^testpd/$',testpd,),
     url(r'^testcontentpd/$',testcontentpd,),
+    url(r'^testdemo/$',testdemo,),
     url(r'^runpd/$',runpd,),
     url(r'^runcontentpd/$',runcontentpd,),
+    url(r'^rundemo/$',rundemo,)
 ]

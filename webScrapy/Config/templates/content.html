@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% block from %}
+    <form action="/testdemo/" method="POST" name="form">
+    {% csrf_token %}
+    <div class="row">
+         <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >模版特征:</span>
+                <input type="text" class="form-control" placeholder="templatesURL" aria-describedby="sizing-addon1" name="url">
+            </div>
+         </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">域名:</span>
+                <input type="text" class="form-control" placeholder="baidu.com(多个之间用“,”隔开)" aria-describedby="sizing-addon1" name="domains">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">模板作者:</span>
+                <input type="text" class="form-control" placeholder="模板作者" aria-describedby="sizing-addon1" name="author">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >数据库地址:</span>
+                <input type="text" class="form-control" placeholder="http://127.0.0.1" aria-describedby="sizing-addon1" name="mysql">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >数据库端口号:</span>
+                <input type="text" class="form-control" placeholder="3306" aria-describedby="sizing-addon1" name="prot">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">用户名:</span>
+                <input type="text" class="form-control" placeholder="root" aria-describedby="sizing-addon1" name="username">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">密码:</span>
+                <input type="password" class="form-control" placeholder="passwd" aria-describedby="sizing-addon1" name="passwd">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >库名:</span>
+                <input type="text" class="form-control" placeholder="database" aria-describedby="sizing-addon1" name="database">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1" >表明:</span>
+                <input type="text" class="form-control" placeholder="table" aria-describedby="sizing-addon1" name="table">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">配置规则</div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">URL:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_url">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="url_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="url_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="url_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">标题:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_title">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="title_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="title_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="title_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">内容:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_content">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="content_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="content_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="content_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">发布时间:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_date">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                    <option >value</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="date_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="date_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="date_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">作者:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_author">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="author_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="author_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="author_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">来源:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_sitename">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                    <option >value</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="sitename_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="sitename_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="sitename_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">评论数:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_comment">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                    <option >value</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="comment_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="comment_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="comment_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">转发数:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_zf">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                    <option >value</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="zf_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="zf_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="zf_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">浏览量:</span>
+                            <span class="input-group-addon">
+                                <select class="form-control" style="width: 100px" name="select_ll">
+                                    <option >xpath</option>
+                                    <option >css</option>
+                                    <option >value</option>
+                                </select>
+                            </span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="检索表达式" aria-describedby="sizing-addon1" name="ll_xpath">
+                            <span class="input-group-addon" id="sizing-addon1">正则</span>
+                            <input type="text" style="height: 56px" class="form-control" placeholder="正则表达式" aria-describedby="sizing-addon1" name="ll_regex">
+                                <span class="input-group-addon">
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="button" class="btn btn-default" onclick="ll_test()">检测</button>
+                                    </div>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="btn-group" role="group" aria-label="">
+                <button type="button" class="btn btn-default" onclick="testdemo()">测试运行</button>
+                <button type="button" class="btn btn-default" onclick="rundemo()">提交</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">结果</div>
+                    <div class="panel-body" style="height: auto">
+                        {#Jinja2参数#}
+                        <h1>url:{{ url }}</h1>
+                        <h1>domains:{{ domains }}</h1>
+                        <h1>author:{{ author }}</h1>
+                        <h1>mysql:{{ mysql }}</h1>
+                        <h1>prot:{{ prot }}</h1>
+                        <h1>username:{{ username }}</h1>
+                        <h1>passwd:{{ passwd }}</h1>
+                        <h1>database:{{ database }}</h1>
+                        <h1>table:{{ table }}</h1>
+                        <h1>url_xpath:{{ url_xpath }}</h1>
+                        <h1>url_regex:{{ url_regex }}</h1>
+                        <h1>select_url:{{ select_url }}</h1>
+                        <h1>title_xpath:{{ title_xpath }}</h1>
+                        <h1>title_regex:{{ title_regex }}</h1>
+                        <h1>select_title:{{ select_title }}</h1>
+                        <h1>content_xpath:{{ content_xpath }}</h1>
+                        <h1>content_regex:{{ content_regex }}</h1>
+                        <h1>select_content:{{ select_content }}</h1>
+                        <h1>date_xpath:{{ date_xpath }}</h1>
+                        <h1>date_regex:{{ date_regex }}</h1>
+                        <h1>select_date:{{ select_date }}</h1>
+                        <h1>author_xpath:{{ author_xpath }}</h1>
+                        <h1>author_regex:{{ author_regex }}</h1>
+                        <h1>select_author:{{ select_author }}</h1>
+                        <h1>sitename_xpath:{{ sitename_xpath }}</h1>
+                        <h1>sitename_regex:{{ sitename_regex }}</h1>
+                        <h1>select_sitename:{{ select_sitename }}</h1>
+                        <h1>comment_xpath:{{ comment_xpath }}</h1>
+                        <h1>comment_regex:{{ comment_regex }}</h1>
+                        <h1>select_comment:{{ select_comment }}</h1>
+                        <h1>zf_xpath:{{ zf_xpath }}</h1>
+                        <h1>zf_regex:{{ zf_regex }}</h1>
+                        <h1>select_zf:{{ select_zf }}</h1>
+                        <h1>ll_xpath:{{ ll_xpath }}</h1>
+                        <h1>ll_regex:{{ ll_regex }}</h1>
+                        <h1>select_ll:{{ select_ll }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+{% endblock %}
+{% block javascript %}
+<script>
+        function testdemo(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function rundemo(){
+            document.form.action="/rundemo/";
+            document.form.submit();
+        }
+        function url_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function title_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function content_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function date_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function author_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function sitename_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function comment_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function zf_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+        function ll_test(){
+            document.form.action="/testdemo/";
+            document.form.submit();
+        }
+    </script>
+{% endblock %}
