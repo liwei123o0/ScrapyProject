@@ -366,8 +366,6 @@ def rundemo(request):
     ll_xpath   =   request.POST['ll_xpath']
     ll_regex   =   request.POST['ll_regex']
 
-
-
     RunDemoConfig.objects.create(url=url,
                              domains=domains,
                              author=author,
@@ -405,5 +403,4 @@ def rundemo(request):
                             ll_xpath=ll_xpath,
                             ll_regex=ll_regex,
     )
-
     return render(request,'success.html')
