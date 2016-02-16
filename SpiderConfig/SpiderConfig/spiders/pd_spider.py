@@ -21,7 +21,7 @@ class PdSpider(scrapy.Spider):
     url_regex = sql[3]
     url = sql[4]
     domains = sql[5]
-
+    print title_xpath
     name = 'pd'
     allowed_domains = [domains]
     start_urls = [url]
