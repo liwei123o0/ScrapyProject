@@ -63,7 +63,7 @@ NEWSPIDER_MODULE = 'SpiderConfig.spiders'
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
 #    'SpiderConfig.pipelines.SomePipeline': 300,
-    'SpiderConfig.pipelines.SpiderPdPipeline':300,
+    'SpiderConfig.pipelines.SpiderPdPipeline':500,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
